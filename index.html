@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoMarket - Търсене на автомобили</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="login-section" class="fullscreen-flex">
+    <div class="login-box">
+        <img src="img/logo.png" alt="AutoMarket" class="main-logo">
+        <p class="subtitle">Вход за дилъри и потребители</p>
+        <form id="login-form">
+            <div class="form-group">
+                <label>Потребител / Имейл</label>
+                <input type="text" required>
+            </div>
+            <div class="form-group">
+                <label>Парола</label>
+                <input type="password" required>
+            </div>
+            <button type="submit" class="btn-primary btn-block">Вход</button>
+        </form>
+    </div>
+</div>
+
+<div id="app-section">
+    <header class="navbar">
+        <div class="nav-container">
+            <img src="img/logo.png" alt="AutoMarket" class="nav-logo" onclick="resetFilters()">
+            <div class="nav-user">
+                <button onclick="showAboutView()" class="nav-icon-btn" title="За нас">ℹ️ За нас</button>
+                <button onclick="toggleTheme()" class="nav-icon-btn" id="theme-btn" title="Смени темата">🌙</button>
+                <button onclick="showFavorites()" class="nav-fav-btn">
+                    ❤️ Любими <span id="fav-count" class="fav-badge">0</span>
+                </button>
+                <button onclick="location.reload()" class="btn-outline">Изход</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-layout">
+        <aside class="sidebar">
+            <button onclick="openMatchmakerModal()" class="btn-matchmaker btn-block">🤖 Не знаеш какво търсиш?<br><span style="font-size: 12px; font-weight: normal;">Опитай AI Асистента</span></button>
+
+            <div class="panel">
+                <h2>🔍 Умно търсене</h2>
+                <div class="form-group">
+                    <input type="text" id="smart-search" placeholder="Напр. Audi дизел 2018..." onkeyup="smartSearch()">
+                </div>
+                <button onclick="resetFilters()" class="btn-secondary btn-block">Изчисти</button>
+            </div>
+
+            <div class="panel">
+                <h2>Добави обява</h2>
+                <form id="add-car-form">
+                    <div class="form-group">
+                        <label>Снимка (URL)</label>
+                        <input type="text" id="add-image" required placeholder="img/car.jpg">
+                    </div>
+                    <div class="form-group">
+                        <label>Марка</label>
+                        <input type="text" id="add-make" required placeholder="Toyota">
+                    </div>
+                    <div class="form-group">
+                        <label>Модел</label>
+                        <input type="text" id="add-model" required placeholder="Corolla">
+                    </div>
+                    <div class="form-group">
+                        <label>Година</label>
+                        <input type="number" id="add-year" required placeholder="2018">
+                    </div>
+                    <div class="form-group">
+                        <label>Цена (€)</label>
+                        <input type="number" id="add-price" required placeholder="15000">
+                    </div>
+                    <button type="submit" class="btn-success btn-block">Публикувай</button>
+                </form>
+            </div>
+        </aside>
+
+        <section class="content">
+            <div id="main-view">
+                <div class="results-header">
+                    <h2 id="view-title">Намерени автомобили: <span id="results-count" class="badge">0</span></h2>
+                </div>
+                <div id="cars-list" class="cars-grid"></div>
+
+                <div id="recent-views-section" style="display: none; margin-top: 50px;">
+                    <h2 style="margin-bottom: 20px; border-bottom: 2px solid var(--bg-color); padding-bottom: 10px;">🕒 Последно разгледани</h2>
+                    <div id="recent-list" class="cars-grid" style="grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));"></div>
+                </div>
+            </div>
+
+            <div id="details-view" style="display: none;">
+                <button onclick="showMainView()" class="btn-outline" style="margin-bottom: 20px;">← Назад</button>
+                <div class="product-page">
+                    <div class="product-header">
+                        <h1 id="det-title"></h1>
+                        <div class="det-price" id="det-price"></div>
+                    </div>
+                    
+                    <div class="product-main">
+                        <div class="product-gallery">
+                            <img id="det-img" src="" alt="">
+                            <a id="det-link" href="#" target="_blank" class="btn-view-image">Отвори снимката в пълен размер ↗</a>
+                            <div class="product-description">
+                                <h3>Подробно описание</h3>
+                                <p id="det-extras"></p>
+                            </div>
+                        </div>
+                        
+                        <div class="product-specs">
+                            <h3>Технически характеристики</h3>
+                            <div class="specs-table-container">
+                                <table class="specs-table">
+                                    <tr><td>📅 Година:</td><td id="det-year"></td></tr>
+                                    <tr><td>🛣️ Пробег:</td><td id="det-km"></td></tr>
+                                    <tr><td>⛽ Гориво:</td><td id="det-fuel"></td></tr>
+                                    <tr><td>⚙️ Скорости:</td><td id="det-trans"></td></tr>
+                                    <tr><td>🐎 Мощност:</td><td id="det-hp"></td></tr>
+                                </table>
+                            </div>
+                            
+                            <div class="leasing-calculator">
+                                <h3>📊 Лизингов калкулатор</h3>
+                                <div class="calc-group">
+                                    <label>Първоначална вноска: <span><span id="down-val">20</span>%</span></label>
+                                    <input type="range" id="calc-down" min="10" max="50" step="5" value="20">
+                                </div>
+                                <div class="calc-group">
+                                    <label>Срок: <span><span id="months-val">60</span> мес.</span></label>
+                                    <input type="range" id="calc-months" min="12" max="72" step="12" value="60">
+                                </div>
+                                <div class="calc-result">
+                                    <span id="monthly-payment">0</span> <span style="font-size: 16px;">€ / мес.</span>
+                                </div>
+                            </div>
+
+                            <button id="contact-btn" class="btn-primary btn-block" style="margin-top: 25px; font-size: 18px; padding: 15px;">📞 Свържи се с продавач</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="about-view" style="display: none;">
+                <button onclick="showMainView()" class="btn-outline" style="margin-bottom: 20px;">← Назад към обявите</button>
+                <div class="product-page">
+                    <div class="product-header" style="justify-content: center;">
+                        <h1>Информация за AutoMarket</h1>
+                    </div>
+                    <div class="about-content">
+                        <img src="img/logo.png" alt="AutoMarket" class="about-logo">
+                        <p class="about-text">Ние сме водеща платформа за търговия с автомобили, създадена с една основна цел – да направи процеса по покупко-продажба максимално лесен, прозрачен и сигурен за всеки един потребител.</p>
+                        
+                        <div class="about-features">
+                            <div class="feature-card">
+                                <span class="feature-icon">🛡️</span>
+                                <h3>Сигурност</h3>
+                                <p>Всички обяви се преглеждат и верифицират от нашия екип от експерти.</p>
+                            </div>
+                            <div class="feature-card">
+                                <span class="feature-icon">⚡</span>
+                                <h3>Иновации</h3>
+                                <p>Най-модерните дигитални инструменти за интелигентен избор на кола.</p>
+                            </div>
+                            <div class="feature-card">
+                                <span class="feature-icon">🤝</span>
+                                <h3>Доверие</h3>
+                                <p>Хиляди доволни клиенти всеки месец намират своя автомобил при нас.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+</div>
+
+<div id="compare-bar" class="compare-bar" style="display: none;">
+    <span id="compare-text">Избрани: 0/2</span>
+    <div>
+        <button onclick="openCompareModal()" class="btn-primary">⚖️ Сравни</button>
+        <button onclick="clearCompare()" class="btn-secondary" style="margin-left: 10px;">Изчисти</button>
+    </div>
+</div>
+
+<div id="compare-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeCompareModal()">&times;</span>
+        <h2 style="margin-bottom: 20px; color: var(--primary-color);">Сравнение</h2>
+        <table class="compare-table" id="compare-table"></table>
+    </div>
+</div>
+
+<div id="matchmaker-modal" class="modal">
+    <div class="modal-content" style="max-width: 500px; text-align: center;">
+        <span class="close-modal" onclick="closeMatchmakerModal()">&times;</span>
+        <h2 style="color: #8e44ad; margin-bottom: 10px;">🤖 AI Асистент</h2>
+        <p style="margin-bottom: 25px; color: var(--text-light);">Отговори на 3 кратки въпроса и ние ще намерим перфектната кола за теб!</p>
+
+        <div class="form-group" style="text-align: left;">
+            <label>1. Какъв е бюджетът ти?</label>
+            <select id="match-budget">
+                <option value="15000">До 15,000 €</option>
+                <option value="25000">До 25,000 €</option>
+                <option value="50000">До 50,000 €</option>
+                <option value="999999">Без лимит</option>
+            </select>
+        </div>
+
+        <div class="form-group" style="text-align: left;">
+            <label>2. За какво ще ползваш колата?</label>
+            <select id="match-purpose">
+                <option value="city">Предимно градско (Компактна / Икономична)</option>
+                <option value="family">Семейна (Сигурност и място)</option>
+                <option value="sport">Спортна (Емоция и скорост)</option>
+                <option value="offroad">Офроуд / Планина (4x4)</option>
+            </select>
+        </div>
+
+        <div class="form-group" style="text-align: left; margin-bottom: 30px;">
+            <label>3. Какво предпочиташ?</label>
+            <select id="match-fuel">
+                <option value="eco">Максимална икономия (Ел. / Хибрид)</option>
+                <option value="diesel">Дълги пътувания (Дизел)</option>
+                <option value="power">Мощност и динамика (Бензин)</option>
+            </select>
+        </div>
+
+        <button onclick="findMatch()" class="btn-matchmaker btn-block" style="margin-bottom: 0;">Намери перфектната кола 🚀</button>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
