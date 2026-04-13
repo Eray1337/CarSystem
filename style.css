@@ -59,7 +59,7 @@ input:focus, select:focus { border-color: var(--primary-color); }
 .login-box { background: var(--white); padding: 50px 40px; border-radius: 16px; width: 100%; max-width: 420px; box-shadow: 0 25px 50px rgba(0,0,0,0.5); text-align: center; }
 .subtitle { color: var(--text-light); margin-bottom: 30px; }
 
-#app-section { display: none; }
+
 .main-layout { max-width: 1200px; margin: 40px auto; display: flex; gap: 30px; padding: 0 20px; }
 .sidebar { width: 320px; flex-shrink: 0; }
 .content { flex-grow: 1; }

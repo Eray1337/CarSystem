@@ -15,12 +15,37 @@ function toggleTheme() {
     document.getElementById('theme-btn').innerText = isDark ? '☀️' : '🌙';
 }
 
-document.getElementById('login-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    document.getElementById('login-section').style.display = 'none';
-    document.getElementById('app-section').style.display = 'block';
-});
+const loginForm = document.getElementById('login-form');
+if (loginForm) {
+    loginForm.addEventListener('submit', function (e) {
+        e.preventDefault();
 
+        // Вместо пренасочване, само сменяме видимостта (по-безопасно)
+        const loginSec = document.getElementById('login-section');
+        const appSec = document.getElementById('app-section');
+
+        if (loginSec) loginSec.style.display = 'none';
+        if (appSec) appSec.style.display = 'block';
+
+        // Смяна на бутоните
+        const loginBtn = document.getElementById('login-nav-btn');
+        const logoutBtn = document.getElementById('logout-nav-btn');
+
+        if (loginBtn) loginBtn.style.display = 'none';
+        if (logoutBtn) logoutBtn.style.display = 'inline-block';
+
+        alert('Успешен вход!');
+    });
+}
+
+function showLogin() {
+    const appSec = document.getElementById('app-section');
+    const loginSec = document.getElementById('login-section');
+    if (appSec && loginSec) {
+        appSec.style.display = 'none';
+        loginSec.style.display = 'flex';
+    }
+}
 const defaultCars = [
     { id: 1, make: 'BMW', model: '320d', year: 2019, price: 17890, km: '145000', fuel: 'Дизел', trans: 'Автоматична', hp: '190 к.с.', image: 'IMG/BMW 320D.jpg', extras: 'Пълна сервизна история в BMW.' },
     { id: 2, make: 'Audi', model: 'A4', year: 2018, price: 16600, km: '122000', fuel: 'Бензин', trans: 'Автоматична', hp: '252 к.с.', image: 'IMG/audi2.jpg', extras: 'Quattro, S-line, Matrix LED.' },
@@ -282,3 +307,19 @@ document.getElementById('add-car-form').addEventListener('submit', function(e) {
 
 document.getElementById('fav-count').innerText = favorites.length;
 resetFilters();
+function showLogin() {
+    document.getElementById('app-section').style.display = 'none';
+    document.getElementById('login-section').style.display = 'flex';
+}
+
+document.getElementById('login-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    document.getElementById('login-section').style.display = 'none';
+    document.getElementById('app-section').style.display = 'block';
+
+    document.getElementById('login-nav-btn').style.display = 'none';
+    document.getElementById('logout-nav-btn').style.display = 'inline-block';
+
+    alert('Добре дошли в AutoMarket!');
+});

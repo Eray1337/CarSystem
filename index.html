@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<div id="login-section" class="fullscreen-flex">
+<div id="login-section" class="fullscreen-flex" style="display: none;">
     <div class="login-box">
         <img src="img/logo.png" alt="AutoMarket" class="main-logo">
         <p class="subtitle">Вход за дилъри и потребители</p>
@@ -34,9 +34,10 @@
                 <button onclick="showAboutView()" class="nav-icon-btn" title="За нас">ℹ️ За нас</button>
                 <button onclick="toggleTheme()" class="nav-icon-btn" id="theme-btn" title="Смени темата">🌙</button>
                 <button onclick="showFavorites()" class="nav-fav-btn">
-                     Любими <span id="fav-count" class="fav-badge">0</span>
+                    Любими <span id="fav-count" class="fav-badge">0</span>
                 </button>
-                <button onclick="location.reload()" class="btn-outline">Изход</button>
+                <button onclick="showLogin()" class="btn-primary" id="login-nav-btn">Вход</button>
+                <button onclick="location.reload()" class="btn-outline" id="logout-nav-btn" style="display: none;">Изход</button>
             </div>
         </div>
     </header>
