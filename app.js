@@ -22,26 +22,26 @@ document.getElementById('login-form').addEventListener('submit', function(e) {
 });
 
 const defaultCars = [
-    { id: 1, make: 'BMW', model: '320d', year: 2019, price: 17890, km: '145000', fuel: 'Дизел', trans: 'Автоматична', hp: '190 к.с.', image: 'img/BMW 320D.jpg', extras: 'Пълна сервизна история в BMW.' },
-    { id: 2, make: 'Audi', model: 'A4', year: 2018, price: 16600, km: '122000', fuel: 'Бензин', trans: 'Автоматична', hp: '252 к.с.', image: 'img/audi2.jpg', extras: 'Quattro, S-line, Matrix LED.' },
-    { id: 3, make: 'Toyota', model: 'Corolla', year: 2019, price: 19400, km: '89000', fuel: 'Хибрид', trans: 'CVT', hp: '122 к.с.', image: 'img/corola.avif', extras: 'Икономичен автомобил. Гаранция.' },
-    { id: 4, make: 'Honda', model: 'Civic', year: 2017, price: 12780, km: '110000', fuel: 'Бензин', trans: 'Ръчна', hp: '182 к.с.', image: 'img/civic.jpeg', extras: 'VTEC Turbo двигател.' },
-    { id: 5, make: 'Mercedes-Benz', model: 'C-Class', year: 2019, price: 26580, km: '95000', fuel: 'Дизел', trans: 'Автоматична', hp: '194 к.с.', image: 'img/mercedes-benz-c300-hero.webp', extras: 'AMG Line, Панорамен покрив.' },
-    { id: 6, make: 'Volkswagen', model: 'Golf', year: 2020, price: 17380, km: '65000', fuel: 'Бензин', trans: 'DSG', hp: '150 к.с.', image: 'img/WH12990-4201-00-front-800x600.jpg', extras: 'Digital Cockpit, Адаптивно окачване.' },
-    { id: 7, make: 'Tesla', model: 'Model 3', year: 2019, price: 33230, km: '78000', fuel: 'Електричество', trans: 'Автоматична', hp: '351 к.с.', image: 'img/images.jpg', extras: 'Long Range, Автопилот.' },
-    { id: 8, make: 'Ford', model: 'Mustang', year: 2018, price: 29650, km: '55000', fuel: 'Бензин', trans: 'Ръчна', hp: '450 к.с.', image: 'img/images (1).jpg', extras: '5.0 V8 GT, Brembo спирачки.' },
-    { id: 9, make: 'Porsche', model: '911', year: 2019, price: 94580, km: '22000', fuel: 'Бензин', trans: 'PDK', hp: '450 к.с.', image: 'img/images (2).jpg', extras: 'Carrera S, Sport Chrono пакет.' },
-    { id: 10, make: 'Land Rover', model: 'Range Rover Velar', year: 2018, price: 38340, km: '115000', fuel: 'Дизел', trans: 'Автоматична', hp: '240 к.с.', image: 'img/2018-range-rover-velar1.avif', extras: 'R-Dynamic пакет, Въздушно окачване.' },
-    { id: 11, make: 'Mazda', model: 'MX-5', year: 2019, price: 16360, km: '41000', fuel: 'Бензин', trans: 'Ръчна', hp: '184 к.с.', image: 'img/mazda-miata-30th-anniversary-001.webp', extras: 'Bilstein амортисьори.' },
-    { id: 12, make: 'Volvo', model: 'XC90', year: 2019, price: 43460, km: '108000', fuel: 'Дизел', trans: 'Автоматична', hp: '235 к.с.', image: 'img/2018-Volvo-XC90-T6-AWD-123-1.avif', extras: 'Inscription ниво, 7 места.' },
-    { id: 13, make: 'Nissan', model: 'Qashqai', year: 2018, price: 14310, km: '135000', fuel: 'Дизел', trans: 'Ръчна', hp: '130 к.с.', image: 'img/images (3).jpg', extras: 'Tekna изпълнение, 360 камери.' },
-    { id: 14, make: 'Peugeot', model: '3008', year: 2018, price: 15330, km: '128000', fuel: 'Дизел', trans: 'Автоматична', hp: '130 к.с.', image: 'img/Peugeot_e-3008_Automesse_Ludwigsburg_2024_IMG_1537.jpg', extras: 'i-Cockpit, Масаж.' },
-    { id: 15, make: 'Skoda', model: 'Octavia', year: 2018, price: 12270, km: '160000', fuel: 'Дизел', trans: 'Ръчна', hp: '150 к.с.', image: 'img/Skoda_Octavia_IV_liftback_(cropped).jpg', extras: 'Style пакет, Full LED.' },
-    { id: 16, make: 'Renault', model: 'Clio', year: 2020, price: 11240, km: '52000', fuel: 'Бензин', trans: 'Ръчна', hp: '100 к.с.', image: 'img/images clio.jpg', extras: 'Intens оборудване, LED светлини.' },
-    { id: 17, make: 'Kia', model: 'Sportage', year: 2019, price: 15850, km: '98000', fuel: 'Дизел', trans: 'Автоматична', hp: '136 к.с.', image: 'img/2019-Kia-Sportage-GTLine-01.webp', extras: 'GT-Line, 4x4 задвижване.' },
-    { id: 18, make: 'Hyundai', model: 'Tucson', year: 2018, price: 14820, km: '112000', fuel: 'Бензин', trans: 'Ръчна', hp: '132 к.с.', image: 'img/2018_hyundai_tucson_4dr-suv_limited_fq_oem_4_1600.avif', extras: 'Premium ниво.' },
-    { id: 19, make: 'Alfa Romeo', model: 'Giulia', year: 2018, price: 19940, km: '85000', fuel: 'Бензин', trans: 'Автоматична', hp: '200 к.с.', image: 'img/ALPHA.jpg', extras: 'Veloce пакет, Карбонов кардан.' },
-    { id: 20, make: 'Jeep', model: 'Wrangler', year: 2019, price: 36810, km: '62000', fuel: 'Бензин', trans: 'Автоматична', hp: '272 к.с.', image: 'img/JEEP.webp', extras: 'Rubicon версия, Off-road гуми.' }
+    { id: 1, make: 'BMW', model: '320d', year: 2019, price: 17890, km: '145000', fuel: 'Дизел', trans: 'Автоматична', hp: '190 к.с.', image: 'IMG/BMW 320D.jpg', extras: 'Пълна сервизна история в BMW.' },
+    { id: 2, make: 'Audi', model: 'A4', year: 2018, price: 16600, km: '122000', fuel: 'Бензин', trans: 'Автоматична', hp: '252 к.с.', image: 'IMG/audi2.jpg', extras: 'Quattro, S-line, Matrix LED.' },
+    { id: 3, make: 'Toyota', model: 'Corolla', year: 2019, price: 19400, km: '89000', fuel: 'Хибрид', trans: 'CVT', hp: '122 к.с.', image: 'IMG/corola.avif', extras: 'Икономичен автомобил. Гаранция.' },
+    { id: 4, make: 'Honda', model: 'Civic', year: 2017, price: 12780, km: '110000', fuel: 'Бензин', trans: 'Ръчна', hp: '182 к.с.', image: 'IMG/civic.jpeg', extras: 'VTEC Turbo двигател.' },
+    { id: 5, make: 'Mercedes-Benz', model: 'C-Class', year: 2019, price: 26580, km: '95000', fuel: 'Дизел', trans: 'Автоматична', hp: '194 к.с.', image: 'IMG/mercedes-benz-c300-hero.webp', extras: 'AMG Line, Панорамен покрив.' },
+    { id: 6, make: 'Volkswagen', model: 'Golf', year: 2020, price: 17380, km: '65000', fuel: 'Бензин', trans: 'DSG', hp: '150 к.с.', image: 'IMG/WH12990-4201-00-front-800x600.jpg', extras: 'Digital Cockpit, Адаптивно окачване.' },
+    { id: 7, make: 'Tesla', model: 'Model 3', year: 2019, price: 33230, km: '78000', fuel: 'Електричество', trans: 'Автоматична', hp: '351 к.с.', image: 'IMG/images.jpg', extras: 'Long Range, Автопилот.' },
+    { id: 8, make: 'Ford', model: 'Mustang', year: 2018, price: 29650, km: '55000', fuel: 'Бензин', trans: 'Ръчна', hp: '450 к.с.', image: 'IMG/images (1).jpg', extras: '5.0 V8 GT, Brembo спирачки.' },
+    { id: 9, make: 'Porsche', model: '911', year: 2019, price: 94580, km: '22000', fuel: 'Бензин', trans: 'PDK', hp: '450 к.с.', image: 'IMG/images (2).jpg', extras: 'Carrera S, Sport Chrono пакет.' },
+    { id: 10, make: 'Land Rover', model: 'Range Rover Velar', year: 2018, price: 38340, km: '115000', fuel: 'Дизел', trans: 'Автоматична', hp: '240 к.с.', image: 'IMG/2018-range-rover-velar1.avif', extras: 'R-Dynamic пакет, Въздушно окачване.' },
+    { id: 11, make: 'Mazda', model: 'MX-5', year: 2019, price: 16360, km: '41000', fuel: 'Бензин', trans: 'Ръчна', hp: '184 к.с.', image: 'IMG/mazda-miata-30th-anniversary-001.webp', extras: 'Bilstein амортисьори.' },
+    { id: 12, make: 'Volvo', model: 'XC90', year: 2019, price: 43460, km: '108000', fuel: 'Дизел', trans: 'Автоматична', hp: '235 к.с.', image: 'IMG/2018-Volvo-XC90-T6-AWD-123-1.avif', extras: 'Inscription ниво, 7 места.' },
+    { id: 13, make: 'Nissan', model: 'Qashqai', year: 2018, price: 14310, km: '135000', fuel: 'Дизел', trans: 'Ръчна', hp: '130 к.с.', image: 'IMG/images (3).jpg', extras: 'Tekna изпълнение, 360 камери.' },
+    { id: 14, make: 'Peugeot', model: '3008', year: 2018, price: 15330, km: '128000', fuel: 'Дизел', trans: 'Автоматична', hp: '130 к.с.', image: 'IMG/Peugeot_e-3008_Automesse_Ludwigsburg_2024_IMG_1537.jpg', extras: 'i-Cockpit, Масаж.' },
+    { id: 15, make: 'Skoda', model: 'Octavia', year: 2018, price: 12270, km: '160000', fuel: 'Дизел', trans: 'Ръчна', hp: '150 к.с.', image: 'IMG/Skoda_Octavia_IV_liftback_(cropped).jpg', extras: 'Style пакет, Full LED.' },
+    { id: 16, make: 'Renault', model: 'Clio', year: 2020, price: 11240, km: '52000', fuel: 'Бензин', trans: 'Ръчна', hp: '100 к.с.', image: 'IMG/images clio.jpg', extras: 'Intens оборудване, LED светлини.' },
+    { id: 17, make: 'Kia', model: 'Sportage', year: 2019, price: 15850, km: '98000', fuel: 'Дизел', trans: 'Автоматична', hp: '136 к.с.', image: 'IMG/2019-Kia-Sportage-GTLine-01.webp', extras: 'GT-Line, 4x4 задвижване.' },
+    { id: 18, make: 'Hyundai', model: 'Tucson', year: 2018, price: 14820, km: '112000', fuel: 'Бензин', trans: 'Ръчна', hp: '132 к.с.', image: 'IMG/2018_hyundai_tucson_4dr-suv_limited_fq_oem_4_1600.avif', extras: 'Premium ниво.' },
+    { id: 19, make: 'Alfa Romeo', model: 'Giulia', year: 2018, price: 19940, km: '85000', fuel: 'Бензин', trans: 'Автоматична', hp: '200 к.с.', image: 'IMG/ALPHA.jpg', extras: 'Veloce пакет, Карбонов кардан.' },
+    { id: 20, make: 'Jeep', model: 'Wrangler', year: 2019, price: 36810, km: '62000', fuel: 'Бензин', trans: 'Автоматична', hp: '272 к.с.', image: 'IMG/JEEP.webp', extras: 'Rubicon версия, Off-road гуми.' }
 ];
 
 let cars = JSON.parse(localStorage.getItem('autoMarketCars')) || defaultCars;
